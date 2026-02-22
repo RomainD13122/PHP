@@ -1,0 +1,1051 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #0a0a0a;
+    color: #e0e0e0;
+    line-height: 1.6;
+}
+
+/* ================================================
+   HEADER & NAVIGATION
+   ================================================ */
+
+header {
+    background: rgba(0,0,0,0.95);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    border-bottom: 1px solid #333;
+    padding: 1rem 5%;
+}
+
+header .container {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header .logo {
+    color: #ff4d4d;
+    font-size: 2.2rem;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    gap: 1.8rem;
+}
+
+nav a {
+    color: #ddd;
+    text-decoration: none;
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+nav a:hover {
+    color: #ff4d4d;
+}
+
+/* Menu profil déroulant */
+.profile-menu {
+    position: relative;
+}
+
+.profile-btn {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 2.2rem;
+    cursor: pointer;
+    padding: 0;
+}
+
+.profile-dropdown {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: calc(100% + 10px);
+    background: #1a1a1a;
+    border: 1px solid #333;
+    border-radius: 8px;
+    min-width: 220px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.7);
+}
+
+.profile-menu:hover .profile-dropdown {
+    display: block;
+}
+
+.profile-dropdown a {
+    display: block;
+    padding: 0.9rem 1.4rem;
+    color: #ddd;
+    text-decoration: none;
+}
+
+.profile-dropdown a:hover {
+    background: #ff4d4d33;
+    color: white;
+}
+
+/* ================================================
+   MAIN & GRILLE FILMS
+   ================================================ */
+
+main {
+    max-width: 1400px;
+    margin: 2rem auto;
+    padding: 0 5%;
+}
+
+.movie-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 2rem;
+}
+
+.movie-card {
+    background: #111;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.7);
+    transition: 0.3s;
+}
+
+.movie-card:hover {
+    transform: translateY(-12px);
+    box-shadow: 0 15px 40px rgba(255,77,77,0.25);
+}
+
+.movie-card img {
+    width: 100%;
+    height: 340px;
+    object-fit: cover;
+}
+
+.badge {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: bold;
+    color: white;
+}
+
+.badge-new { background: #ff4d4d; }
+.badge-fav { background: #28a745; }
+
+.movie-info {
+    padding: 1.4rem;
+    text-align: center;
+}
+
+.movie-info h3 {
+    color: #ff4d4d;
+    font-size: 1.35rem;
+    margin: 0.6rem 0;
+}
+
+.movie-info p {
+    color: #aaa;
+    font-size: 0.95rem;
+    margin-bottom: 1.2rem;
+}
+
+.btn-primary {
+    background: #ff4d4d;
+    color: white;
+    padding: 0.8rem 1.6rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+    display: inline-block;
+    text-decoration: none;
+}
+
+.btn-primary:hover {
+    background: #e63939;
+}
+
+/* Responsive grille films */
+@media (max-width: 768px) {
+    .movie-grid {
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    }
+    header .container {
+        flex-direction: column;
+        gap: 1.5rem;
+        text-align: center;
+    }
+}
+
+/* ================================================
+   PAGE LOGIN / INSCRIPTION - Gros carré centré & large
+   ================================================ */
+
+main form {
+    width: 100%;
+    max-width: 520px; /* plus large pour que les champs respirent */
+    margin: 6rem auto 4rem;
+    padding: 3.5rem 3rem;
+    background: rgba(15, 15, 15, 0.98);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 77, 77, 0.18);
+    box-shadow: 0 25px 80px rgba(0,0,0,0.9),
+                0 0 50px rgba(255, 77, 77, 0.15);
+    backdrop-filter: blur(10px);
+}
+
+main h1 {
+    color: #ff4d4d;
+    font-size: 3rem;
+    font-weight: 800;
+    text-align: center;
+    margin: 0 0 3rem;
+    text-shadow: 0 0 20px rgba(255, 77, 77, 0.35);
+}
+
+/* Message "Session expirée" ou erreur */
+.alert.alert-danger,
+main p:not([class]) {
+    background: rgba(220, 53, 69, 0.18);
+    border: 1px solid #dc3545;
+    color: #ffdddd;
+    padding: 1.2rem;
+    border-radius: 12px;
+    margin-bottom: 2rem;
+    text-align: center;
+    font-size: 1.1rem;
+}
+
+/* Labels fixes au-dessus (pas de float = pas de superposition) */
+form label {
+    display: block;
+    color: #ff4d4d;
+    font-size: 1.15rem;
+    font-weight: 600;
+    margin-bottom: 0.8rem;
+}
+
+/* Inputs email/password - larges et hauts */
+form input[type="email"],
+form input[type="password"] {
+    width: 100%;
+    padding: 1.4rem 1.6rem;
+    background: #0b0b0b;
+    border: 2px solid #333;
+    border-radius: 12px;
+    color: #e8e8e8;
+    font-size: 1.3rem;
+    transition: all 0.3s ease;
+    outline: none;
+    box-shadow: inset 0 3px 12px rgba(0,0,0,0.5);
+}
+
+/* Focus glow rouge */
+form input:focus {
+    border-color: #ff4d4d;
+    box-shadow: 0 0 0 5px rgba(255, 77, 77, 0.25),
+                inset 0 3px 12px rgba(0,0,0,0.5);
+    background: #111;
+}
+
+form input:hover:not(:focus) {
+    border-color: #555;
+}
+
+/* Bouton "Se connecter" / "S'inscrire" - gros & centré */
+form button[type="submit"] {
+    width: 100%;
+    padding: 1.4rem;
+    margin-top: 2rem;
+    background: linear-gradient(135deg, #ff4d4d 0%, #e63939 100%);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: 1.4rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.35s ease;
+    box-shadow: 0 10px 40px rgba(255, 77, 77, 0.4);
+}
+
+form button[type="submit"]:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 70px rgba(255, 77, 77, 0.6);
+    background: linear-gradient(135deg, #ff3333 0%, #d00000 100%);
+}
+
+/* Lien "Créer un compte" */
+form + p {
+    text-align: center;
+    margin-top: 2.5rem;
+    color: #aaa;
+    font-size: 1.1rem;
+}
+
+form + p a {
+    color: #ff4d4d;
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+form + p a:hover {
+    color: #ff8080;
+    text-decoration: underline;
+}
+
+/* Responsive login */
+@media (max-width: 576px) {
+    main form {
+        margin: 4rem 1rem;
+        padding: 2.5rem 2rem;
+    }
+    main h1 {
+        font-size: 2.4rem;
+    }
+    form button[type="submit"] {
+        font-size: 1.2rem;
+    }
+}
+
+/* ================================================
+   AUTRES PAGES (grille films, showtimes, admin, profil, etc.)
+   ================================================ */
+
+.movie-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 2rem;
+}
+
+.movie-card {
+    background: #111;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.7);
+    transition: 0.3s;
+}
+
+.movie-card:hover {
+    transform: translateY(-12px);
+    box-shadow: 0 15px 40px rgba(255,77,77,0.25);
+}
+
+.movie-card img {
+    width: 100%;
+    height: 340px;
+    object-fit: cover;
+}
+
+.badge {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: bold;
+    color: white;
+}
+
+.badge-new { background: #ff4d4d; }
+.badge-fav { background: #28a745; }
+
+.movie-info {
+    padding: 1.4rem;
+    text-align: center;
+}
+
+.movie-info h3 {
+    color: #ff4d4d;
+    font-size: 1.35rem;
+    margin: 0.6rem 0;
+}
+
+.movie-info p {
+    color: #aaa;
+    font-size: 0.95rem;
+    margin-bottom: 1.2rem;
+}
+
+.btn-primary {
+    background: #ff4d4d;
+    color: white;
+    padding: 0.8rem 1.6rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+    display: inline-block;
+    text-decoration: none;
+}
+
+.btn-primary:hover {
+    background: #e63939;
+}
+
+/* Showtimes */
+.showtimes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 5%;
+}
+
+.showtime-card {
+    background: #111;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.7);
+    transition: all 0.4s ease;
+    border: 1px solid #222;
+    position: relative;
+}
+
+.showtime-card:hover {
+    transform: translateY(-12px) scale(1.03);
+    box-shadow: 0 20px 50px rgba(255, 77, 77, 0.25);
+    border-color: #ff4d4d33;
+}
+
+.showtime-card .card-content {
+    padding: 1.8rem;
+    text-align: center;
+}
+
+.showtime-card .datetime {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: white;
+    margin-bottom: 0.8rem;
+    display: block;
+}
+
+.showtime-card .time {
+    font-size: 2.4rem;
+    color: #ff4d4d;
+    margin: 0.3rem 0;
+}
+
+.showtime-card .room {
+    font-size: 1.1rem;
+    color: #aaa;
+    margin: 0.5rem 0;
+}
+
+.showtime-card .places {
+    display: inline-block;
+    padding: 0.6rem 1.2rem;
+    background: #222;
+    border-radius: 30px;
+    font-weight: bold;
+    margin: 1rem 0;
+    font-size: 1.1rem;
+}
+
+.showtime-card .places strong {
+    color: #ff4d4d;
+}
+
+.showtime-card .action a,
+.showtime-card .action span {
+    display: inline-block;
+    padding: 0.9rem 2rem;
+    border-radius: 50px;
+    font-weight: bold;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    font-size: 1.05rem;
+}
+
+.showtime-card .action a {
+    background: #ff4d4d;
+    color: white;
+    box-shadow: 0 4px 15px rgba(255, 77, 77, 0.4);
+}
+
+.showtime-card .action a:hover {
+    background: #e63939;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(255, 77, 77, 0.6);
+}
+
+.showtime-card .action span {
+    background: #333;
+    color: #888;
+    cursor: not-allowed;
+}
+
+/* Profil */
+.profile-container {
+    max-width: 900px;
+    margin: 4rem auto;
+    padding: 3rem;
+    background: rgba(17, 17, 17, 0.92);
+    border-radius: 20px;
+    border: 1px solid #222;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.8);
+}
+
+.profile-container h1 {
+    color: #ff4d4d;
+    font-size: 2.8rem;
+    text-align: center;
+    margin-bottom: 3rem;
+    text-shadow: 0 0 15px rgba(255,77,77,0.4);
+}
+
+.profile-info {
+    background: #0f0f0f;
+    padding: 1.8rem;
+    border-radius: 12px;
+    margin-bottom: 3rem;
+    border: 1px solid #333;
+}
+
+.profile-info p {
+    font-size: 1.2rem;
+    margin: 1rem 0;
+}
+
+.rank {
+    font-weight: bold;
+    padding: 0.3rem 0.8rem;
+    border-radius: 8px;
+}
+
+.rank.admin { background: #ff4d4d33; color: #ff4d4d; }
+.rank.user { background: #333; color: #aaa; }
+
+.section {
+    background: #111;
+    padding: 2rem;
+    border-radius: 16px;
+    margin-bottom: 3rem;
+    border: 1px solid #222;
+}
+
+.section h2 {
+    color: #ff4d4d;
+    margin-bottom: 1.5rem;
+}
+
+.danger-zone {
+    border-color: #dc3545;
+}
+
+.warning {
+    color: #ffcccc;
+    margin-bottom: 1.5rem;
+}
+
+.alert {
+    padding: 1rem;
+    border-radius: 10px;
+    margin-bottom: 1.5rem;
+}
+
+.alert.success { background: rgba(40,167,69,0.15); border: 1px solid #28a745; color: #d4edda; }
+.alert.danger { background: rgba(220,53,69,0.15); border: 1px solid #dc3545; color: #f8d7da; }
+
+input, button {
+    width: 100%;
+    padding: 1rem;
+    margin: 0.8rem 0;
+    border-radius: 10px;
+    font-size: 1.1rem;
+}
+
+input[type="password"], input[type="text"], input[type="email"] {
+    background: #0a0a0a;
+    border: 1px solid #444;
+    color: white;
+}
+
+.btn-primary {
+    background: #ff4d4d;
+    border: none;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-primary:hover {
+    background: #e63939;
+}
+
+.btn-danger {
+    background: #dc3545;
+    border: none;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-danger:hover {
+    background: #c82333;
+}
+
+.btn-danger.small {
+    width: auto;
+    padding: 0.6rem 1.2rem;
+    font-size: 0.95rem;
+}
+
+.users-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1.5rem;
+}
+
+.users-table th, .users-table td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid #222;
+}
+
+.users-table th {
+    background: #0f0f0f;
+    color: #ff4d4d;
+}
+
+/* Showtimes */
+.showtimes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 5%;
+}
+
+.showtime-card {
+    background: #111;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.7);
+    transition: all 0.4s ease;
+    border: 1px solid #222;
+    position: relative;
+}
+
+.showtime-card:hover {
+    transform: translateY(-12px) scale(1.03);
+    box-shadow: 0 20px 50px rgba(255, 77, 77, 0.25);
+    border-color: #ff4d4d33;
+}
+
+.showtime-card .card-content {
+    padding: 1.8rem;
+    text-align: center;
+}
+
+.showtime-card .datetime {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: white;
+    margin-bottom: 0.8rem;
+    display: block;
+}
+
+.showtime-card .time {
+    font-size: 2.4rem;
+    color: #ff4d4d;
+    margin: 0.3rem 0;
+}
+
+.showtime-card .room {
+    font-size: 1.1rem;
+    color: #aaa;
+    margin: 0.5rem 0;
+}
+
+.showtime-card .places {
+    display: inline-block;
+    padding: 0.6rem 1.2rem;
+    background: #222;
+    border-radius: 30px;
+    font-weight: bold;
+    margin: 1rem 0;
+    font-size: 1.1rem;
+}
+
+.showtime-card .places strong {
+    color: #ff4d4d;
+}
+
+.showtime-card .action a,
+.showtime-card .action span {
+    display: inline-block;
+    padding: 0.9rem 2rem;
+    border-radius: 50px;
+    font-weight: bold;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    font-size: 1.05rem;
+}
+
+.showtime-card .action a {
+    background: #ff4d4d;
+    color: white;
+    box-shadow: 0 4px 15px rgba(255, 77, 77, 0.4);
+}
+
+.showtime-card .action a:hover {
+    background: #e63939;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(255, 77, 77, 0.6);
+}
+
+.showtime-card .action span {
+    background: #333;
+    color: #888;
+    cursor: not-allowed;
+}
+
+/* Responsive showtimes */
+@media (max-width: 768px) {
+    .showtimes-grid {
+        grid-template-columns: 1fr;
+        padding: 0 1rem;
+    }
+    
+    main h1 {
+        font-size: 2.4rem;
+    }
+    
+    .showtime-card .time {
+        font-size: 2rem;
+    }
+}
+
+/* Transition hover cartes */
+.transition-hover {
+    transition: all 0.35s ease;
+}
+
+.transition-hover:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 40px rgba(255, 77, 77, 0.25) !important;
+    border-color: #ff4d4d80 !important;
+}
+
+/* Admin table */
+.container, body > div {
+    max-width: 1400px;
+    margin: 3rem auto;
+    padding: 0 2rem;
+}
+
+h1 {
+    color: #ff4d4d;
+    font-size: 3.2rem;
+    font-weight: 800;
+    text-align: center;
+    margin: 2rem 0 3rem;
+    letter-spacing: -1px;
+    background: linear-gradient(90deg, #ff4d4d, #ff8080, #ff4d4d);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 25px rgba(255, 77, 77, 0.45);
+    position: relative;
+}
+
+h1::after {
+    content: '';
+    position: absolute;
+    bottom: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 140px;
+    height: 4px;
+    background: linear-gradient(90deg, transparent, #ff4d4d, transparent);
+    border-radius: 2px;
+}
+
+/* Responsive admin */
+@media (max-width: 992px) {
+    h1 {
+        font-size: 2.6rem;
+    }
+}
+
+/* ================================================
+   SUITE CSS - MES RÉSERVATIONS + ADMIN FILMS
+   ================================================ */
+
+/* MES RÉSERVATIONS - Cartes améliorées et centrées */
+.container.my-5 {
+    max-width: 1400px;
+    margin: 4rem auto;
+    padding: 0 1.5rem;
+}
+
+h1.text-center.mb-5 {
+    font-size: 3.2rem;
+    font-weight: 800;
+    letter-spacing: -1px;
+    background: linear-gradient(90deg, #ff4d4d, #ff8080);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 30px rgba(255, 77, 77, 0.4);
+    margin: 3rem 0 4rem;
+    position: relative;
+}
+
+h1.text-center.mb-5::after {
+    content: '';
+    position: absolute;
+    bottom: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 140px;
+    height: 4px;
+    background: linear-gradient(90deg, transparent, #ff4d4d, transparent);
+    border-radius: 2px;
+}
+
+/* Bloc "Aucune réservation" */
+.text-center.py-5.bg-dark.rounded-3.shadow-lg.border.border-secondary {
+    background: rgba(17, 17, 17, 0.85);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 77, 77, 0.15);
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.8), 0 0 40px rgba(255, 77, 77, 0.12);
+    padding: 5rem 2rem;
+}
+
+.text-center.py-5 h3 {
+    font-size: 2.2rem;
+    color: #ff8080;
+    margin-bottom: 1.5rem;
+    text-shadow: 0 0 15px rgba(255, 77, 77, 0.3);
+}
+
+.text-center.py-5 .lead {
+    font-size: 1.25rem;
+    max-width: 600px;
+    margin: 0 auto 2.5rem;
+}
+
+/* Cartes réservations */
+.row.g-4 .col-md-6.col-lg-4 {
+    perspective: 1000px;
+}
+
+.card.bg-dark {
+    background: linear-gradient(145deg, #111, #0f0f0f);
+    border: 1px solid rgba(255, 77, 77, 0.12);
+    border-radius: 18px;
+    overflow: hidden;
+    transition: all 0.45s ease;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.7);
+    transform-style: preserve-3d;
+}
+
+.card.bg-dark:hover {
+    transform: translateY(-15px) rotateX(5deg) rotateY(5deg);
+    box-shadow: 0 30px 80px rgba(255, 77, 77, 0.3);
+    border-color: rgba(255, 77, 77, 0.35);
+}
+
+.card-title.text-danger {
+    font-size: 1.6rem;
+    font-weight: 700;
+    margin-bottom: 1.2rem;
+    background: linear-gradient(90deg, #ff4d4d, #ff9999);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.card-text {
+    font-size: 1.05rem;
+    color: #ddd;
+    margin-bottom: 0.8rem;
+}
+
+.card-text strong {
+    color: #ff4d4d;
+    font-weight: 600;
+}
+
+/* Responsive réservations */
+@media (max-width: 992px) {
+    h1.text-center.mb-5 {
+        font-size: 2.6rem;
+    }
+    .card-title.text-danger {
+        font-size: 1.4rem;
+    }
+}
+
+/* ================================================
+   PAGE ADMIN GESTION FILMS - Tableau propre
+   ================================================ */
+
+table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 12px;
+    margin-top: 2rem;
+}
+
+tr {
+    background: #111;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.6);
+    transition: all 0.3s ease;
+}
+
+tr:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 18px 50px rgba(255, 77, 77, 0.25);
+}
+
+th {
+    background: linear-gradient(180deg, #1a1a1a, #111);
+    color: #ff4d4d;
+    font-weight: 700;
+    padding: 1.2rem 1.5rem;
+    text-align: left;
+    border-bottom: 2px solid #ff4d4d33;
+    font-size: 1.1rem;
+}
+
+td {
+    padding: 1.3rem 1.5rem;
+    color: #ddd;
+    font-size: 1.05rem;
+    vertical-align: middle;
+}
+
+td:first-child {
+    font-weight: bold;
+    color: #aaa;
+}
+
+td:nth-child(3) {
+    color: #bbb;
+    max-width: 400px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+td:last-child a {
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s;
+    margin: 0 0.5rem;
+}
+
+td:last-child a[href*="edit"] {
+    background: rgba(0, 123, 255, 0.15);
+    color: #4dabf7;
+    border: 1px solid #4dabf7;
+}
+
+td:last-child a[href*="edit"]:hover {
+    background: rgba(0, 123, 255, 0.3);
+    color: white;
+}
+
+td:last-child a[href*="del"] {
+    background: rgba(220, 53, 69, 0.15);
+    color: #ff6b6b;
+    border: 1px solid #ff6b6b;
+}
+
+td:last-child a[href*="del"]:hover {
+    background: rgba(220, 53, 69, 0.4);
+    color: white;
+}
+
+/* Bouton "+ Ajouter un film" */
+a[href="/admin/movies/add"] {
+    display: inline-block;
+    padding: 0.9rem 2rem;
+    background: linear-gradient(135deg, #28a745, #1e7e34);
+    color: white;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 50px;
+    box-shadow: 0 6px 20px rgba(40, 167, 69, 0.4);
+    transition: all 0.35s ease;
+    margin-bottom: 2rem;
+}
+
+a[href="/admin/movies/add"]:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 35px rgba(40, 167, 69, 0.6);
+    background: linear-gradient(135deg, #2ecc71, #27ae60);
+}
+
+/* Responsive admin */
+@media (max-width: 992px) {
+    h1 {
+        font-size: 2.6rem;
+    }
+    table, thead, tbody, th, td, tr {
+        display: block;
+    }
+    thead tr {
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+    }
+    tr {
+        margin-bottom: 2rem;
+        border-radius: 16px;
+    }
+    td {
+        border: none;
+        border-bottom: 1px solid #222;
+        position: relative;
+        padding-left: 50%;
+        text-align: right;
+    }
+    td::before {
+        content: attr(data-label);
+        position: absolute;
+        left: 1rem;
+        width: 45%;
+        padding-right: 1rem;
+        white-space: nowrap;
+        text-align: left;
+        font-weight: bold;
+        color: #ff4d4d;
+    }
+    td:first-child::before { content: "ID"; }
+    td:nth-child(2)::before { content: "Titre"; }
+    td:nth-child(3)::before { content: "Description"; }
+    td:last-child::before { content: "Actions"; display: none; }
+    td:last-child {
+        text-align: center;
+        padding: 1rem;
+    }
+}

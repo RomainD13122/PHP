@@ -1,0 +1,62 @@
+-- --------------------------------------------------------
+-- Hôte:                         127.0.0.1
+-- Version du serveur:           8.4.3 - MySQL Community Server - GPL
+-- SE du serveur:                Win64
+-- HeidiSQL Version:             12.8.0.6908
+-- --------------------------------------------------------
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET NAMES utf8 */;
+/*!50503 SET NAMES utf8mb4 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+-- Listage des données de la table cinema_min.bookings : ~4 rows (environ)
+INSERT INTO `bookings` (`id`, `user_id`, `showtime_id`, `seats`, `created_at`) VALUES
+	(1, 3, 4, 1, '2026-02-06 16:52:59'),
+	(2, 3, 4, 2, '2026-02-16 14:23:49'),
+	(3, 3, 7, 4, '2026-02-16 14:26:26'),
+	(4, 3, 5, 5, '2026-02-16 14:26:59'),
+	(5, 3, 4, 3, '2026-02-22 14:22:36');
+
+-- Listage des données de la table cinema_min.movies : ~10 rows (environ)
+INSERT INTO `movies` (`id`, `title`, `description`) VALUES
+	(1, 'Dune: Part Two', 'Suite de l’épopée de science-fiction. Paul Atreides poursuit sa quête de vengeance et de pouvoir sur la planète désertique Arrakis, face à des forces impitoyables.'),
+	(2, 'Oppenheimer', 'Biopic monumental sur J. Robert Oppenheimer, le physicien à l’origine de la bombe atomique. Un portrait intense de génie, de dilemme moral et de conséquences historiques.'),
+	(3, 'Arcane', 'Dans les cités jumelles de Piltover et Zaun, deux sœurs aux destins opposés s’affrontent dans une guerre technologique et magique. Une série animée visuellement époustouflante, pleine d’action, de trahisons et d’émotions brutes. Chef-d’œuvre inspiré de League of Legends.'),
+	(4, 'Jujutsu Kaisen 0', 'Préquel explosif de la série culte. Yuta Okkotsu, hanté par une malédiction mortelle, rejoint l’école de sorcellerie jujutsu pour affronter des forces démoniaques. Action intense et émotion forte.'),
+	(5, 'Demon Slayer: Kimetsu no Yaiba : La Forteresse infinie', 'Le train infini emporte Tanjiro et ses compagnons dans un cauchemar. Un affrontement épique contre Enmu, démon des rêves, et le puissant Akaza. Animation somptueuse et combats inoubliables.'),
+	(6, 'Un p\'tit truc en plus', 'Comédie française touchante et hilarante. Un jeune homme paumé se retrouve à gérer un centre pour adultes en situation de handicap. Rires, tendresse et messages positifs garantis.'),
+	(7, 'Les Tuche 4', 'Les Tuche débarquent à Monaco pour sauver leur fortune. Humour déjanté, situations absurdes et famille attachante : la suite explosive de la saga préférée des Français.'),
+	(8, 'Le Comte de Monte-Cristo', 'Adaptation moderne et spectaculaire du classique de Dumas. Trahi et emprisonné, Edmond Dantès s’évade et prépare une vengeance magistrale. Thriller historique haletant et visuellement grandiose.'),
+	(9, 'F1', 'Brad Pitt incarne un pilote légendaire de retour en Formule 1 pour sauver une équipe en perdition. Adrénaline, vitesse et rivalités intenses dans les coulisses de la course reine.'),
+	(10, 'Chainsaw Man – Le Film : L’arc de Reze', 'Après avoir mit hors d\'état de nuire Katana Man, Denji va faire la rencontre de Reze, une jeune femme qui semble s\'intéresser à lui.');
+
+-- Listage des données de la table cinema_min.showtimes : ~0 rows (environ)
+INSERT INTO `showtimes` (`id`, `movie_id`, `date`, `time`, `room`, `total_seats`, `price`) VALUES
+	(1, 1, '2025-03-10', '20:30:00', 'Salle Principale', 140, 10.00),
+	(2, 1, '2025-03-11', '18:15:00', 'Salle 2', 80, 10.00),
+	(3, 2, '2025-03-12', '21:00:00', 'Salle Principale', 120, 10.00),
+	(4, 3, '2025-03-13', '19:45:00', 'Salle 3', 60, 10.00),
+	(5, 1, '2025-03-15', '20:30:00', 'Salle 1', 140, 12.50),
+	(6, 1, '2025-03-16', '18:00:00', 'Salle 2', 80, 11.00),
+	(7, 2, '2025-03-17', '21:00:00', 'Salle Principale', 120, 13.00),
+	(8, 3, '2025-03-18', '19:45:00', 'Salle 3', 100, 10.00),
+	(10, 3, '2026-02-11', '01:02:00', '', 100, 10.00);
+
+-- Listage des données de la table cinema_min.users : ~6 rows (environ)
+INSERT INTO `users` (`id`, `username`, `email`, `password`, `created_at`, `role`) VALUES
+	(1, 'Twifoo', 'twifooff@gmail.com', '$2y$10$I/GEmuyzLSSEYvtd1NvPCOsGDfMuvSObMH7488RVGNFg7OkL3Z2VO', '2026-02-05 14:49:46', 'user'),
+	(2, 'Ilan', 'ilan.oudor.off@gmail.com', '$2y$10$BEeNirdrJCtSXNtDYx.Tt.OKlw166zKeYmgf4aqc4SegJ8P32Z.Za', '2026-02-05 15:29:47', 'user'),
+	(3, 'admin', 'admin@php.com', '$2y$10$LO429V6gr6oI0b/lNuOI0uXGvSCdXGvHdbYwI5JSofnCICCgA2LCO', '2026-02-05 15:31:10', 'admin'),
+	(5, 'aaa', 'aaa@gmail.com', '$2y$10$L1qIIpDeaZhQuE3CK8QCKOV8CJwxpx2unXrCXI1K3JdASxU2kEuwW', '2026-02-06 19:25:01', 'user'),
+	(6, 'testtest', 'testtest@test.com', '$2y$10$yUT4HTdm1ms9s9hW3ctZKe2HEy2yEtqv47eblDIHYWDkyFP9rBzlO', '2026-02-16 13:57:30', 'user');
+
+/*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
+/*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
+/*!40014 SET FOREIGN_KEY_CHECKS=IFNULL(@OLD_FOREIGN_KEY_CHECKS, 1) */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40111 SET SQL_NOTES=IFNULL(@OLD_SQL_NOTES, 1) */;
