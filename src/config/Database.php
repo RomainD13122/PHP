@@ -6,9 +6,15 @@ class Database {
 
     public static function get() {
         if (self::$pdo === null) {
+            $host = getenv('DB_HOST') ?: 'localhost';
+            $dbname = getenv('DB_NAME') ?: 'cinema_min';
+            $user = getenv('DB_USER') ?: 'root';
+            $pass = getenv('DB_PASSWORD') ?: '';
+
             self::$pdo = new \PDO(
-                'mysql:host=localhost;dbname=cinema_min;charset=utf8mb4',
-                'root', '',
+                "mysql:host=$host;dbname=$dbname;charset=utf8mb4",
+                $user,
+                $pass,
                 [\PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION]
             );
         }
